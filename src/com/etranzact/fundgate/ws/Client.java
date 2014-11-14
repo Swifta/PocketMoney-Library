@@ -36,6 +36,7 @@ public class Client {
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 
 		pocketMoneyClient.configureSecurity();
+		// these are static data
 		String sender = "2348063305711", reciever = "2348076763191", transactionType = "cashin", mmo = "pocketmoni", reference = "1234", teasypin = "1234";
 		long amount = 200;
 		MoneyTransfer moneyTransfer = new MoneyTransfer(sender, reciever,
