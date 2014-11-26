@@ -28,52 +28,58 @@ public class AES {
 	private static final String characterEncoding = "UTF-8";
 	private static final String cipherTransformation = "AES/CBC/PKCS5Padding";
 	private static final String aesEncryptionAlgorithm = "AES";
-	
+
 	public static String generateKey() throws NoSuchAlgorithmException {
 		KeyGenerator keyGen = KeyGenerator.getInstance(aesEncryptionAlgorithm);
-	    SecureRandom random = new SecureRandom(); // cryptograph. secure random 
-	    keyGen.init(random); 
-	    SecretKey secretKey = keyGen.generateKey();
-	    
-	    byte[] raw = secretKey.getEncoded();
-	    
-	    return Base64.encodeBase64String(raw);
-	    
+		SecureRandom random = new SecureRandom(); // cryptograph. secure random
+		keyGen.init(random);
+		SecretKey secretKey = keyGen.generateKey();
+
+		byte[] raw = secretKey.getEncoded();
+
+		return Base64.encodeBase64String(raw);
+
 	}
 
-	public static byte[] decrypt(byte[] cipherText, byte[] key, byte[] initialVector)
-			throws NoSuchAlgorithmException, NoSuchPaddingException,
-			InvalidKeyException, InvalidAlgorithmParameterException,
-			IllegalBlockSizeException, BadPaddingException {
-		
+	public static byte[] decrypt(byte[] cipherText, byte[] key,
+			byte[] initialVector) throws NoSuchAlgorithmException,
+			NoSuchPaddingException, InvalidKeyException,
+			InvalidAlgorithmParameterException, IllegalBlockSizeException,
+			BadPaddingException {
+
 		Cipher cipher = Cipher.getInstance(cipherTransformation);
-		SecretKeySpec secretKeySpecy = new SecretKeySpec(key,aesEncryptionAlgorithm);
+		SecretKeySpec secretKeySpecy = new SecretKeySpec(key,
+				aesEncryptionAlgorithm);
 		IvParameterSpec ivParameterSpec = new IvParameterSpec(initialVector);
 		cipher.init(Cipher.DECRYPT_MODE, secretKeySpecy, ivParameterSpec);
 		cipherText = cipher.doFinal(cipherText);
-		
+
 		return cipherText;
 	}
 
-	public static byte[] encrypt(byte[] plainText, byte[] key, byte[] initialVector)
-			throws NoSuchAlgorithmException, NoSuchPaddingException,
-			InvalidKeyException, InvalidAlgorithmParameterException,
-			IllegalBlockSizeException, BadPaddingException {
-		
+	public static byte[] encrypt(byte[] plainText, byte[] key,
+			byte[] initialVector) throws NoSuchAlgorithmException,
+			NoSuchPaddingException, InvalidKeyException,
+			InvalidAlgorithmParameterException, IllegalBlockSizeException,
+			BadPaddingException {
+
 		Cipher cipher = Cipher.getInstance(cipherTransformation);
-		SecretKeySpec secretKeySpec = new SecretKeySpec(key,aesEncryptionAlgorithm);
+		SecretKeySpec secretKeySpec = new SecretKeySpec(key,
+				aesEncryptionAlgorithm);
 		IvParameterSpec ivParameterSpec = new IvParameterSpec(initialVector);
 		cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
 		plainText = cipher.doFinal(plainText);
-		
+
 		return plainText;
 	}
 
-	private static byte[] getKeyBytes(String key) throws UnsupportedEncodingException {
+	private static byte[] getKeyBytes(String key)
+			throws UnsupportedEncodingException {
 		byte[] keyBytes = new byte[16];
 		byte[] parameterKeyBytes = key.getBytes(characterEncoding);
-		System.arraycopy(parameterKeyBytes, 0, keyBytes, 0, Math.min(parameterKeyBytes.length, keyBytes.length));
-		
+		System.arraycopy(parameterKeyBytes, 0, keyBytes, 0,
+				Math.min(parameterKeyBytes.length, keyBytes.length));
+
 		return keyBytes;
 	}
 
@@ -91,8 +97,9 @@ public class AES {
 			BadPaddingException {
 		byte[] plainTextbytes = plainText.getBytes(characterEncoding);
 		byte[] keyBytes = getKeyBytes(key);
-		
-		return Base64.encodeBase64String(encrypt(plainTextbytes, keyBytes, keyBytes));
+
+		return Base64.encodeBase64String(encrypt(plainTextbytes, keyBytes,
+				keyBytes));
 	}
 
 	// / <summary>
@@ -111,10 +118,14 @@ public class AES {
 		return new String(decrypt(cipheredBytes, keyBytes, keyBytes),
 				characterEncoding);
 	}
-	
-	public static void main(String args[]) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException, InvalidAlgorithmParameterException{
-		//AES aes = new AES();
+
+	public static void main(String args[]) throws InvalidKeyException,
+			NoSuchAlgorithmException, NoSuchPaddingException,
+			IllegalBlockSizeException, BadPaddingException,
+			UnsupportedEncodingException, InvalidAlgorithmParameterException {
+		// AES aes = new AES();
 		System.out.println(AES.encrypt("0012", "KEd4gDNSDdMBxCGliZaC8w=="));
-		//System.out.println(PocketMoneyClient.Encrypt("0012", "KEd4gDNSDdMBxCGliZaC8w=="));
+		// System.out.println(PocketMoneyClient.Encrypt("0012",
+		// "KEd4gDNSDdMBxCGliZaC8w=="));
 	}
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.axis2.transport.http.HTTPConstants;
@@ -25,6 +24,11 @@ public class PocketMoneyClient {
 	// String fundgateURl = "";
 
 	private String wso2appserverHome = "";
+	private final String agentMSISDN = "2347031537019";
+	private final String subscriberMSISDN = "2348076763191";
+	private final String terminalId = "20000000054";
+	private final String masterKey = "KEd4gDNSDdMBxCGliZaC8w==";
+	private final String samplePin = "0012";
 
 	public PocketMoneyClient() throws Exception {
 
@@ -52,11 +56,13 @@ public class PocketMoneyClient {
 		System.setProperty("javax.net.ssl.trustStore", clientSSLStore);
 		System.setProperty("javax.net.ssl.trustStoreType", "JKS");
 		System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
-		System.setProperty("javax.net.debug", "ssl");
+		// System.setProperty("javax.net.debug", "ssl");
 		// System.setProperty("https.protocols", "SSLv3");
-
+		// System.setProperty("https.protocols", "TLSV");
+		java.lang.System.setProperty("jdk.tls.client.protocols",
+				"TLSv1,TLSv1.1,TLSv1.2");
 		Protocol myProtocolHandler = new Protocol("https",
-				new SSL3ProtocolSocketFactory(), 443);
+				new TLSVProtocolSocketFactory(), 443);
 
 		fundgateStub
 				._getServiceClient()
@@ -81,6 +87,9 @@ public class PocketMoneyClient {
 
 		}
 
+		moneyTransfer.setReceiver(subscriberMSISDN);
+		moneyTransfer.setSender(agentMSISDN);
+
 		// FundRequest fundRequest = new FundRequest();
 		// fundRequest.setDirection("request");
 		// fundRequest.setAction("FT");
@@ -100,20 +109,24 @@ public class PocketMoneyClient {
 		fundRequest.setDirection("request");
 		fundRequest.setAction("FT");
 		fundRequest.setId("1");
-		fundRequest.setTerminalId("20000000054");
+		fundRequest.setTerminalId(terminalId);
 
 		Transaction transaction = new Transaction();
-		transaction.setPin(AES.encrypt("0012", "KEd4gDNSDdMBxCGliZaC8w=="));
+		transaction.setPin(AES.encrypt(samplePin, masterKey));
+		// transaction.setToken("TA");
 		// transaction.setTerminalCard(false);
 		// transaction.setBankCode("033");
 		transaction.setAmount(moneyTransfer.getAmount());
 		transaction.setDestination(moneyTransfer.getReceiver());// 2348076763191
+		transaction.setSource(moneyTransfer.getSender());
 		Date dNow = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat("YYYYMMddHHmmSSS");
 		transaction.setReference(ft.format(dNow));
 		transaction.setEndPoint("M");
 		transaction.setId("1274466360545600");
 
+		System.out.println("==============================="
+				+ transaction.toString());
 		fundRequest.setTransaction(transaction);
 
 		com.etranzact.fundgate.ws.FundGateImplServiceStub.Process process = new com.etranzact.fundgate.ws.FundGateImplServiceStub.Process();
@@ -138,15 +151,36 @@ public class PocketMoneyClient {
 
 		}
 
-		FundResponse fundResponse = new FundResponse();
-		fundResponse.setMessage("Not ready yet!!!");
-		fundResponse.setError("Nothing to implement");
-		fundResponse.setOtherReference("12345");
-		fundResponse.setReference("09876");
-		fundResponse.setAmount(1234.5);
-		fundResponse.setDate(Calendar.getInstance());
+		moneyTransfer.setSender(subscriberMSISDN);
+		moneyTransfer.setReceiver(agentMSISDN);
 
-		return fundResponse;
+		FundRequest fundRequest = new FundRequest();
+		fundRequest.setDirection("request");
+		fundRequest.setAction("FT");
+		// fundRequest.setId("1");
+		fundRequest.setTerminalId(terminalId);
+
+		Transaction transaction = new Transaction();
+		transaction.setPin(AES.encrypt(samplePin, masterKey));
+		// transaction.setTerminalCard(false);
+		// transaction.setBankCode("033");
+		transaction.setAmount(moneyTransfer.getAmount());
+		// transaction.setToken("TA");
+		transaction.setDestination(moneyTransfer.getReceiver());// 2348076763191
+		transaction.setSource(moneyTransfer.getSender());
+		Date dNow = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat("YYYYMMddHHmmSSS");
+		transaction.setReference(ft.format(dNow));
+		transaction.setEndPoint("M");
+		transaction.setId("1274466360545600");
+		fundRequest.setTransaction(transaction);
+		com.etranzact.fundgate.ws.FundGateImplServiceStub.Process process = new com.etranzact.fundgate.ws.FundGateImplServiceStub.Process();
+		process.setRequest(fundRequest);
+
+		com.etranzact.fundgate.ws.FundGateImplServiceStub.ProcessResponse processResponse = fundgateStub
+				.process(process);
+
+		return processResponse.getResponse();
 
 	}
 
@@ -259,8 +293,8 @@ public class PocketMoneyClient {
 
 	public static void main(String args[]) throws Exception {
 
-		// performCashInPocket();
-		performCashoutPocket();
+		performCashInPocket();
+		// performCashoutPocket();
 
 	}
 
@@ -287,9 +321,11 @@ public class PocketMoneyClient {
 				null, 100, null, "dada", "7005");
 
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
-
+		System.out
+				.println("---------------------------Before configuring security**********");
 		pocketMoneyClient.configureSecurity();
-
+		System.out
+				.println("---------------------------After configuring security**********");
 		FundResponse response = pocketMoneyClient.doCashIn(moneyTransfer);
 
 		System.out.println("Error Code: " + response.getError());
