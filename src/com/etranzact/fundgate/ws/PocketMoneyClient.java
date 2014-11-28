@@ -24,9 +24,12 @@ public class PocketMoneyClient {
 	// String fundgateURl = "";
 
 	private String wso2appserverHome = "";
-	private final String agentMSISDN = "2347031537019";
-	private final String subscriberMSISDN = "2348076763191";
-	private final String terminalId = "20000000054";
+	// private final String agentMSISDN = "2347031537019";
+	// private final String subscriberMSISDN = "2348076763191";
+	private final String agentMSISDN = "2348056892033";
+	private final String subscriberMSISDN = "2348124442975";
+	// private final String terminalId = "20000000054";
+	private final String terminalId = "7000000001";
 	private final String masterKey = "KEd4gDNSDdMBxCGliZaC8w==";
 	private final String samplePin = "0012";
 
@@ -56,6 +59,7 @@ public class PocketMoneyClient {
 		System.setProperty("javax.net.ssl.trustStore", clientSSLStore);
 		System.setProperty("javax.net.ssl.trustStoreType", "JKS");
 		System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
+		System.setProperty("jsse.enableSNIExtension", "false");
 		// System.setProperty("javax.net.debug", "ssl");
 		// System.setProperty("https.protocols", "SSLv3");
 		// System.setProperty("https.protocols", "TLSV");
@@ -90,21 +94,6 @@ public class PocketMoneyClient {
 		moneyTransfer.setReceiver(subscriberMSISDN);
 		moneyTransfer.setSender(agentMSISDN);
 
-		// FundRequest fundRequest = new FundRequest();
-		// fundRequest.setDirection("request");
-		// fundRequest.setAction("FT");
-		// fundRequest.setId("1");
-		// fundRequest.setTerminalId("20000000054");
-		//
-		// Transaction transaction = new Transaction();
-		// transaction.setPin(AES.encrypt("0012", "KEd4gDNSDdMBxCGliZaC8w=="));
-		// transaction.setBankCode("033");
-		// transaction.setAmount(10.0);
-		// transaction.setDestination("2001220212");
-		// transaction.setReference("4402333999223");
-		// transaction.setEndPoint("A");
-		// transaction.setId("1274466360545600");
-		//
 		FundRequest fundRequest = new FundRequest();
 		fundRequest.setDirection("request");
 		fundRequest.setAction("FT");
@@ -113,9 +102,7 @@ public class PocketMoneyClient {
 
 		Transaction transaction = new Transaction();
 		transaction.setPin(AES.encrypt(samplePin, masterKey));
-		// transaction.setToken("TA");
-		// transaction.setTerminalCard(false);
-		// transaction.setBankCode("033");
+
 		transaction.setAmount(moneyTransfer.getAmount());
 		transaction.setDestination(moneyTransfer.getReceiver());// 2348076763191
 		transaction.setSource(moneyTransfer.getSender());
@@ -157,15 +144,13 @@ public class PocketMoneyClient {
 		FundRequest fundRequest = new FundRequest();
 		fundRequest.setDirection("request");
 		fundRequest.setAction("FT");
-		// fundRequest.setId("1");
+		fundRequest.setId("1");
 		fundRequest.setTerminalId(terminalId);
 
 		Transaction transaction = new Transaction();
 		transaction.setPin(AES.encrypt(samplePin, masterKey));
-		// transaction.setTerminalCard(false);
-		// transaction.setBankCode("033");
+
 		transaction.setAmount(moneyTransfer.getAmount());
-		// transaction.setToken("TA");
 		transaction.setDestination(moneyTransfer.getReceiver());// 2348076763191
 		transaction.setSource(moneyTransfer.getSender());
 		Date dNow = new Date();
@@ -173,6 +158,10 @@ public class PocketMoneyClient {
 		transaction.setReference(ft.format(dNow));
 		transaction.setEndPoint("M");
 		transaction.setId("1274466360545600");
+
+		System.out.println("==============================="
+				+ transaction.toString());
+
 		fundRequest.setTransaction(transaction);
 		com.etranzact.fundgate.ws.FundGateImplServiceStub.Process process = new com.etranzact.fundgate.ws.FundGateImplServiceStub.Process();
 		process.setRequest(fundRequest);
@@ -261,50 +250,22 @@ public class PocketMoneyClient {
 
 	}
 
-	// public static String Encrypt(String plainText, String key)
-	// throws NoSuchAlgorithmException, NoSuchPaddingException,
-	// InvalidKeyException, IllegalBlockSizeException,
-	// BadPaddingException, UnsupportedEncodingException {
-	//
-	// //String cleartext = "test1234test1234";
-	// //String key = "TESTKEYTESTKEY12";
-	// byte[] raw = key.getBytes();
-	// SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-	// try {
-	// Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-	// cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-	// byte[] encrypted;
-	// encrypted = cipher.doFinal(plainText.getBytes());
-	// return new String(Base64.encodeBase64(encrypted));
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// return null;
-
-	// SecretKeySpec keySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
-	//
-	// // Instantiate the cipher
-	// Cipher cipher = Cipher.getInstance("AES");
-	// cipher.init(Cipher.ENCRYPT_MODE, keySpec);
-	//
-	// byte[] encryptedTextBytes = cipher.doFinal(plainText.getBytes("UTF-8"));
-	//
-	// return new Base64().encodeToString(encryptedTextBytes);
-
 	public static void main(String args[]) throws Exception {
 
-		performCashInPocket();
-		// performCashoutPocket();
+		// performCashInPocket();
+		performCashoutPocket();
 
 	}
 
 	public static void performCashoutPocket() throws Exception {
 		MoneyTransfer moneyTransfer = new MoneyTransfer("", "2348076763191",
-				null, 100, null, "dada", "7005");
-
+				null, 10, null, "dada", "7005");
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
-
+		System.out
+				.println("---------------------------Before configuring security**********");
 		pocketMoneyClient.configureSecurity();
+		System.out
+				.println("---------------------------After configuring security**********");
 
 		FundResponse response = pocketMoneyClient.doCashOut(moneyTransfer);
 
@@ -318,7 +279,7 @@ public class PocketMoneyClient {
 
 	public static void performCashInPocket() throws Exception {
 		MoneyTransfer moneyTransfer = new MoneyTransfer("", "2348076763191",
-				null, 100, null, "dada", "7005");
+				null, 10, null, "dada", "7005");
 
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out

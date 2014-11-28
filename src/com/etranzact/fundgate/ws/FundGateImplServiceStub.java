@@ -103,7 +103,7 @@
      */
     public FundGateImplServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"https://staging.etranzact.com/FundGatePlus/ws" );
+                    this(configurationContext,"https://etranzact.net/FundGatePlus/ws" );
                 
     }
 
@@ -112,7 +112,7 @@
      */
     public FundGateImplServiceStub() throws org.apache.axis2.AxisFault {
         
-                    this("https://staging.etranzact.com/FundGatePlus/ws" );
+                    this("https://etranzact.net/FundGatePlus/ws" );
                 
     }
 
@@ -278,13 +278,13 @@
         }
         return false;
     }
-     //https://staging.etranzact.com/FundGatePlus/ws
+     //https://etranzact.net/FundGatePlus/ws
         public static class BulkItem
         implements org.apache.axis2.databinding.ADBBean{
         /* This type was generated from the piece of schema that had
                 name = bulkItem
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -913,7 +913,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -1558,7 +1558,7 @@
         /* This type was generated from the piece of schema that had
                 name = records
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -1726,7 +1726,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -2072,7 +2072,7 @@
         /* This type was generated from the piece of schema that had
                 name = payItem
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -3870,7 +3870,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -5318,7 +5318,7 @@
         /* This type was generated from the piece of schema that had
                 name = record
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -5671,7 +5671,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -6149,7 +6149,7 @@
         /* This type was generated from the piece of schema that had
                 name = transaction
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -8537,7 +8537,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -10117,7 +10117,7 @@
         /* This type was generated from the piece of schema that had
                 name = fundRequest
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -10499,7 +10499,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -10969,7 +10969,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "Records",
-                "ns3");
+                "ns1");
 
             
 
@@ -11047,7 +11047,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -11302,7 +11302,7 @@
         /* This type was generated from the piece of schema that had
                 name = payItems
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -11470,7 +11470,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -11816,7 +11816,7 @@
         /* This type was generated from the piece of schema that had
                 name = fundResponse
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -12677,7 +12677,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -13422,7 +13422,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "FundGate",
-                "ns3");
+                "ns1");
 
             
 
@@ -13527,7 +13527,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -13805,7 +13805,7 @@
         /* This type was generated from the piece of schema that had
                 name = bulkItems
                 Namespace URI = http://ws.fundgate.etranzact.com/
-                Namespace Prefix = ns3
+                Namespace Prefix = ns1
                 */
             
 
@@ -13973,7 +13973,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -14320,7 +14320,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "processResponse",
-                "ns3");
+                "ns1");
 
             
 
@@ -14432,7 +14432,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -14742,7 +14742,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "process",
-                "ns3");
+                "ns1");
 
             
 
@@ -14854,7 +14854,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -15164,7 +15164,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "Record",
-                "ns3");
+                "ns1");
 
             
 
@@ -15242,7 +15242,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -15498,7 +15498,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "BulkItems",
-                "ns3");
+                "ns1");
 
             
 
@@ -15576,7 +15576,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -15832,7 +15832,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "PayItem",
-                "ns3");
+                "ns1");
 
             
 
@@ -15910,7 +15910,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -16166,7 +16166,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "PayItems",
-                "ns3");
+                "ns1");
 
             
 
@@ -16244,7 +16244,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -16500,7 +16500,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://ws.fundgate.etranzact.com/",
                 "BulkItem",
-                "ns3");
+                "ns1");
 
             
 
@@ -16578,7 +16578,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://ws.fundgate.etranzact.com/")){
-                return "ns3";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }

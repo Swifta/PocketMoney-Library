@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/axiom_1.2.11.wso2v4.jar"/>
 	<classpathentry kind="lib" path="lib/axis2_1.6.1.wso2v10.jar"/>
-	<classpathentry kind="lib" path="lib/commons-codec_1.4.0.wso2v1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-httpclient_3.1.0.wso2v2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/httpcore-4.2.4.jar"/>
@@ -13,7 +12,8 @@
 	<classpathentry kind="lib" path="lib/wsdl4j_1.6.2.wso2v4.jar"/>
 	<classpathentry kind="lib" path="lib/wss4j-1.6.11.jar"/>
 	<classpathentry kind="lib" path="lib/XmlSchema-1.4.jar"/>
-	<classpathentry kind="lib" path="/PSACoreModuleEngine/lib/commons-lang-2.6.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec_1.4.0.wso2v1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
