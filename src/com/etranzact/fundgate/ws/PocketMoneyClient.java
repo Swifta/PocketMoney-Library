@@ -258,8 +258,8 @@ public class PocketMoneyClient {
 	}
 
 	public static void performCashoutPocket() throws Exception {
-		MoneyTransfer moneyTransfer = new MoneyTransfer("", "2348076763191",
-				null, 10, null, "dada", "7005");
+		MoneyTransfer moneyTransfer = new MoneyTransfer("2348170730603",
+				"2348056892033", null, 10, null, "dada", "7005");
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out
 				.println("---------------------------Before configuring security**********");
