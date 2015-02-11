@@ -1,6 +1,5 @@
 package com.ng.mats.psa.mt.pocketmoni.model;
 
-
 public class MoneyTransfer {
 
 	private String sender;
@@ -10,12 +9,15 @@ public class MoneyTransfer {
 	private String mmo;
 	private String teasypin;
 	private String teasyrequestreference;
+	private String bankAccountNumber;
+	private String bankSortCode;
 	// @XmlTransient
 	// private CashOutStatus status = CashOutStatus.PENDING;
 	private String reference;
 
-	public MoneyTransfer(String sender, String receiver, String transactionType, long amount, String mmo,
-			String reference, String teasypin) {
+	public MoneyTransfer(String sender, String receiver,
+			String transactionType, long amount, String mmo, String reference,
+			String teasypin) {
 		super();
 		this.sender = sender;
 		this.receiver = receiver;
@@ -67,17 +69,13 @@ public class MoneyTransfer {
 	public void setReference(String reference) {
 		this.reference = reference;
 	}
-	
-	
-	
 
-//	public CashOutStatus getStatus() {
-//		return status;
-//	}
-//
-//	public void setStatus(CashOutStatus status) {
-//		this.status = status;
-	
+	// public CashOutStatus getStatus() {
+	// return status;
+	// }
+	//
+	// public void setStatus(CashOutStatus status) {
+	// this.status = status;
 
 	public String getTransactionType() {
 		return transactionType;
@@ -94,8 +92,6 @@ public class MoneyTransfer {
 	public void setTeasypin(String teasypin) {
 		this.teasypin = teasypin;
 	}
-	
-	
 
 	public String getTeasyrequestreference() {
 		return teasyrequestreference;
@@ -105,6 +101,22 @@ public class MoneyTransfer {
 		this.teasyrequestreference = "201407010000001";
 	}
 
+	public String getBankAccountNumber() {
+		return bankAccountNumber;
+	}
+
+	public void setBankAccountNumber(String bankAccountNumber) {
+		this.bankAccountNumber = bankAccountNumber;
+	}
+
+	public String getBankSortCode() {
+		return bankSortCode;
+	}
+
+	public void setBankSortCode(String bankSortCode) {
+		this.bankSortCode = bankSortCode;
+	}
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Sender: " + sender + "\n");
@@ -112,7 +124,7 @@ public class MoneyTransfer {
 		sb.append("Amount: " + amount + "\n");
 		sb.append("Reference: " + reference + "\n");
 		sb.append("Mmo: " + mmo + "\n");
-		//sb.append("Status: " + status + "\n");
+		// sb.append("Status: " + status + "\n");
 
 		return sb.toString();
 	}

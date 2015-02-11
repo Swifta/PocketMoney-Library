@@ -26,11 +26,14 @@ public class PocketMoneyClient {
 	private String wso2appserverHome = "";
 	// private final String agentMSISDN = "2347031537019";
 	// private final String subscriberMSISDN = "2348076763191";
-	private final String agentMSISDN = "2348056892033";
-	private final String subscriberMSISDN = "2348124442975";
+	// last test private final String agentMSISDN = "2348056892033";
+	private final static String agentMSISDN = "2348092847295";
+	private final static String subscriberMSISDN = "2348124442975";
 	// private final String terminalId = "20000000054";
-	private final String terminalId = "7000000001";
-	private final String masterKey = "KEd4gDNSDdMBxCGliZaC8w==";
+	// private final String terminalId = "7000000001";
+	private final String terminalId = "0300010001";
+	// private final String masterKey = "KEd4gDNSDdMBxCGliZaC8w==";
+	private final String masterKey = "R90aaowC0PrB2zILxzV1uw==";
 	private final String samplePin = "0012";
 
 	public PocketMoneyClient() throws Exception {
@@ -91,9 +94,6 @@ public class PocketMoneyClient {
 
 		}
 
-		moneyTransfer.setReceiver(subscriberMSISDN);
-		moneyTransfer.setSender(agentMSISDN);
-
 		FundRequest fundRequest = new FundRequest();
 		fundRequest.setDirection("request");
 		fundRequest.setAction("FT");
@@ -126,6 +126,51 @@ public class PocketMoneyClient {
 
 	}
 
+	public FundResponse accountQuery(MoneyTransfer moneyTransfer)
+			throws Exception {
+		System.out.println("...Account query...");
+		System.out.println("---------------------------do query");
+		if (fundgateStub == null) {
+			System.out
+					.println("------------------------Fund stub is not available");
+		} else {
+			System.out
+					.println("---------------------------Fund Gate stub is available");
+
+		}
+		FundRequest fundRequest = new FundRequest();
+		fundRequest.setDirection("request");
+		fundRequest.setAction("AQ");
+		fundRequest.setId("1");
+		fundRequest.setTerminalId(terminalId);
+
+		Transaction transaction = new Transaction();
+		transaction.setDestination(moneyTransfer.getBankAccountNumber());
+		transaction.setEndPoint("M");
+		transaction.setBankCode(moneyTransfer.getBankSortCode());
+
+		transaction.setPin(AES.encrypt(samplePin, masterKey));
+
+		Date dNow = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat("YYYYMMddHHmmSSS");
+		transaction.setReference(ft.format(dNow));
+
+		transaction.setId("1274466360545600");
+
+		System.out.println("==============================="
+				+ transaction.toString());
+
+		fundRequest.setTransaction(transaction);
+
+		com.etranzact.fundgate.ws.FundGateImplServiceStub.Process process = new com.etranzact.fundgate.ws.FundGateImplServiceStub.Process();
+		process.setRequest(fundRequest);
+
+		com.etranzact.fundgate.ws.FundGateImplServiceStub.ProcessResponse processResponse = fundgateStub
+				.process(process);
+
+		return processResponse.getResponse();
+	}
+
 	public FundResponse doCashOut(MoneyTransfer moneyTransfer) throws Exception {
 		System.out.println("...Creating account...");
 		System.out.println("---------------------------do cash out");
@@ -137,9 +182,6 @@ public class PocketMoneyClient {
 					.println("---------------------------Fund Gate stub is available");
 
 		}
-
-		moneyTransfer.setSender(subscriberMSISDN);
-		moneyTransfer.setReceiver(agentMSISDN);
 
 		FundRequest fundRequest = new FundRequest();
 		fundRequest.setDirection("request");
@@ -175,8 +217,9 @@ public class PocketMoneyClient {
 
 	public FundResponse getBalance(MoneyTransfer moneyTransfer)
 			throws Exception {
+
 		System.out.println("...Creating account...");
-		System.out.println("---------------------------do cash in");
+		System.out.println("---------------------------do get balance");
 		if (fundgateStub == null) {
 			System.out
 					.println("------------------------Fund stub is not available");
@@ -190,20 +233,48 @@ public class PocketMoneyClient {
 		fundRequest.setDirection("request");
 		fundRequest.setAction("BE");
 		fundRequest.setId("1");
-		fundRequest.setTerminalId("20000000054");
+		fundRequest.setTerminalId(terminalId);
 
 		Transaction transaction = new Transaction();
-		transaction.setPin(AES.encrypt("0012", "KEd4gDNSDdMBxCGliZaC8w=="));
-		// transaction.setTerminalCard(false);
-		// transaction.setBankCode("033");
-		transaction.setAmount(0.0);
-		transaction.setEndPoint("0");
-		transaction.setTerminalCard(false);
+		transaction.setPin(AES.encrypt(samplePin, masterKey));
+
+		// transaction.setAmount(moneyTransfer.getAmount());
+		// transaction.setDestination(moneyTransfer.getReceiver());//
+		// 2348076763191
+		// transaction.setSource(moneyTransfer.getSender());
 		Date dNow = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat("YYYYMMddHHmmSSS");
 		transaction.setReference(ft.format(dNow));
+		// transaction.setEndPoint("M");
+		transaction.setId("1274466360545600");
+
+		System.out.println("==============================="
+				+ transaction.toString());
 
 		fundRequest.setTransaction(transaction);
+
+		/*
+		 * FundRequest fundRequest = new FundRequest();
+		 * fundRequest.setDirection("request"); fundRequest.setAction("BE");
+		 * fundRequest.setId("1"); fundRequest.setTerminalId(terminalId);
+		 * 
+		 * Transaction transaction = new Transaction();
+		 * transaction.setPin(AES.encrypt(samplePin, masterKey));x //
+		 * transaction.setPin(AES.encrypt("0012", "ZhXy4geRgnpqVOH/7V2beg=="));
+		 * // transaction.setPin("ZhXy4geRgnpqVOH/7V2beg=="); //
+		 * transaction.setTerminalCard(false); //
+		 * transaction.setBankCode("033"); //
+		 * transaction.setDestination(moneyTransfer.getReceiver());// //
+		 * 2348076763191 // transaction.setSource(moneyTransfer.getSender()); //
+		 * transaction.setAmount(0.0); // transaction.setEndPoint("0"); //
+		 * transaction.setIdentification(moneyTransfer.getReceiver());
+		 * 
+		 * // transaction.setTerminalCard(false); Date dNow = new Date();
+		 * SimpleDateFormat ft = new SimpleDateFormat("YYYYMMddHHmmSSS");
+		 * transaction.setReference(ft.format(dNow));
+		 * 
+		 * fundRequest.setTransaction(transaction);
+		 */
 
 		com.etranzact.fundgate.ws.FundGateImplServiceStub.Process process = new com.etranzact.fundgate.ws.FundGateImplServiceStub.Process();
 		process.setRequest(fundRequest);
@@ -254,12 +325,40 @@ public class PocketMoneyClient {
 
 		// performCashInPocket();
 		performCashoutPocket();
+		// performBalanceCheck();
+		// performAccountQuery();
 
+	}
+
+	public static void performAccountQuery() throws Exception {
+
+		MoneyTransfer moneyTransfer = new MoneyTransfer("", "2348092847295",
+				null, 5, null, "dada", "6219");
+
+		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
+		moneyTransfer.setBankAccountNumber("5600001236");
+		moneyTransfer.setBankSortCode("1234");
+		System.out
+				.println("---------------------------Before configuring security**********");
+		pocketMoneyClient.configureSecurity();
+		System.out
+				.println("---------------------------After configuring security**********");
+		FundResponse response = pocketMoneyClient.accountQuery(moneyTransfer);
+
+		System.out.println("Error Code: " + response.getError());
+		System.out.println("Message: " + response.getMessage());
+		System.out.println("Other reference: " + response.getOtherReference());
+		System.out.println("Reference: " + response.getReference());
+		System.out.println("Amount: " + response.getAmount());
+		System.out.println("Date: " + response.getDate());
 	}
 
 	public static void performCashoutPocket() throws Exception {
 		MoneyTransfer moneyTransfer = new MoneyTransfer("2348170730603",
-				"2348056892033", null, 10, null, "dada", "7005");
+				"2348056892033", null, 3, null, "dada", "7005");
+		moneyTransfer.setSender(subscriberMSISDN);
+		moneyTransfer.setReceiver(agentMSISDN);
+
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out
 				.println("---------------------------Before configuring security**********");
@@ -278,8 +377,11 @@ public class PocketMoneyClient {
 	}
 
 	public static void performCashInPocket() throws Exception {
-		MoneyTransfer moneyTransfer = new MoneyTransfer("", "2348076763191",
-				null, 10, null, "dada", "7005");
+		MoneyTransfer moneyTransfer = new MoneyTransfer("", "2348076763199",
+				null, 3, null, "dada", "7005");
+
+		moneyTransfer.setReceiver(subscriberMSISDN);
+		moneyTransfer.setSender(agentMSISDN);
 
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out
@@ -288,6 +390,27 @@ public class PocketMoneyClient {
 		System.out
 				.println("---------------------------After configuring security**********");
 		FundResponse response = pocketMoneyClient.doCashIn(moneyTransfer);
+
+		System.out.println("Error Code: " + response.getError());
+		System.out.println("Message: " + response.getMessage());
+		System.out.println("Other reference: " + response.getOtherReference());
+		System.out.println("Reference: " + response.getReference());
+		System.out.println("Amount: " + response.getAmount());
+		System.out.println("Date: " + response.getDate());
+
+	}
+
+	public static void performBalanceCheck() throws Exception {
+		MoneyTransfer moneyTransfer = new MoneyTransfer("", "2348092847295",
+				null, 5, null, "dada", "6219");
+
+		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
+		System.out
+				.println("---------------------------Before configuring security**********");
+		pocketMoneyClient.configureSecurity();
+		System.out
+				.println("---------------------------After configuring security**********");
+		FundResponse response = pocketMoneyClient.getBalance(moneyTransfer);
 
 		System.out.println("Error Code: " + response.getError());
 		System.out.println("Message: " + response.getMessage());
