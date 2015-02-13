@@ -25,16 +25,22 @@ public class PocketMoneyClient {
 
 	private String wso2appserverHome = "";
 	// private final String agentMSISDN = "2347031537019";
-	// private final String subscriberMSISDN = "2348076763191";
-	// last test private final String agentMSISDN = "2348056892033";
+	// private final static String subscriberMSISDN = "2348076763191";
+	// private final static String agentMSISDN = "2348056892033";
+
+	// private final String terminalId = "20000000054";
+
+	// test parameters
+	// private final String terminalId = "7000000001";
+	// private final String masterKey = "KEd4gDNSDdMBxCGliZaC8w==";
+	// private final String samplePin = "0012";
+
+	// production parameters
 	private final static String agentMSISDN = "2348092847295";
 	private final static String subscriberMSISDN = "2348124442975";
-	// private final String terminalId = "20000000054";
-	// private final String terminalId = "7000000001";
 	private final String terminalId = "0300010001";
-	// private final String masterKey = "KEd4gDNSDdMBxCGliZaC8w==";
 	private final String masterKey = "R90aaowC0PrB2zILxzV1uw==";
-	private final String samplePin = "0012";
+	private final String samplePin = "6219";
 
 	public PocketMoneyClient() throws Exception {
 
