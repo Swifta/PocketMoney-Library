@@ -330,8 +330,8 @@ public class PocketMoneyClient {
 	public static void main(String args[]) throws Exception {
 
 		// performCashInPocket();
-		performCashoutPocket();
-		// performBalanceCheck();
+		// performCashoutPocket();
+		performBalanceCheck();
 		// performAccountQuery();
 
 	}
