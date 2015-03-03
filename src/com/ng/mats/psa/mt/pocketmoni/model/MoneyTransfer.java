@@ -11,6 +11,12 @@ public class MoneyTransfer {
 	private String teasyrequestreference;
 	private String bankAccountNumber;
 	private String bankSortCode;
+	private String agentMSISDN;
+	private String subscriberMSISDN;
+	private String terminalId;
+	private String masterKey;
+	private String samplePin;
+
 	// @XmlTransient
 	// private CashOutStatus status = CashOutStatus.PENDING;
 	private String reference;
@@ -28,6 +34,20 @@ public class MoneyTransfer {
 		this.teasyrequestreference = "201407010000001";
 		// this.status = status;
 		this.reference = reference;
+	}
+
+	public MoneyTransfer() {
+
+		this.sender = "";
+		this.receiver = "";
+		this.transactionType = "";
+		this.amount = 0;
+		this.mmo = "";
+		this.teasypin = "";
+		this.teasyrequestreference = "";
+		// this.status = status;
+		this.reference = "";
+
 	}
 
 	public String getSender() {
@@ -115,6 +135,46 @@ public class MoneyTransfer {
 
 	public void setBankSortCode(String bankSortCode) {
 		this.bankSortCode = bankSortCode;
+	}
+
+	public String getAgentMSISDN() {
+		return agentMSISDN;
+	}
+
+	public void setAgentMSISDN(String agentMSISDN) {
+		this.agentMSISDN = agentMSISDN;
+	}
+
+	public String getSubscriberMSISDN() {
+		return subscriberMSISDN;
+	}
+
+	public void setSubscriberMSISDN(String subscriberMSISDN) {
+		this.subscriberMSISDN = subscriberMSISDN;
+	}
+
+	public String getTerminalId() {
+		return terminalId;
+	}
+
+	public void setTerminalId(String terminalId) {
+		this.terminalId = terminalId;
+	}
+
+	public String getMasterKey() {
+		return masterKey;
+	}
+
+	public void setMasterKey(String masterKey) {
+		this.masterKey = masterKey;
+	}
+
+	public String getSamplePin() {
+		return samplePin;
+	}
+
+	public void setSamplePin(String samplePin) {
+		this.samplePin = samplePin;
 	}
 
 	public String toString() {
