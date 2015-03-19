@@ -336,8 +336,8 @@ public class PocketMoneyClient {
 	public static void main(String args[]) throws Exception {
 
 		// performCashInPocket();
-		// performCashoutPocket();
-		performBalanceCheck();
+		performCashoutPocket();
+		// performBalanceCheck();
 		// performAccountQuery();
 
 	}
@@ -366,10 +366,11 @@ public class PocketMoneyClient {
 	public static void performCashoutPocket() throws Exception {
 		// MoneyTransfer moneyTransfer = new MoneyTransfer("2348170730603",
 		// "2348056892033", null, 3, null, "dada", "7005");
+
+		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		moneyTransfer.setSender(moneyTransfer.getSubscriberMSISDN());
 		moneyTransfer.setReceiver(moneyTransfer.getAgentMSISDN());
 
-		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out
 				.println("---------------------------Before configuring security**********");
 		pocketMoneyClient.configureSecurity();
