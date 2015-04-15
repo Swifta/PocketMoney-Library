@@ -46,6 +46,7 @@ public class PocketMoneyClient {
 
 	public PocketMoneyClient() throws Exception {
 		moneyTransfer = new PocketMoniPropertyValues().getPropertyValues();
+		setMoneyTransfer(moneyTransfer);
 		fundgateStub = new FundGateImplServiceStub();
 
 		if (System.getProperty("os.name").equals("Mac OS X")) {
@@ -436,6 +437,14 @@ public class PocketMoneyClient {
 		String transactionId = "";
 		transactionId = RandomStringUtils.randomNumeric(length);
 		return transactionId;
+	}
+
+	public static MoneyTransfer getMoneyTransfer() {
+		return moneyTransfer;
+	}
+
+	public static void setMoneyTransfer(MoneyTransfer moneyTransfer) {
+		PocketMoneyClient.moneyTransfer = moneyTransfer;
 	}
 
 }
