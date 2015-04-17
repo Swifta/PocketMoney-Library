@@ -1,6 +1,5 @@
 package com.etranzact.fundgate.ws;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
@@ -24,7 +23,7 @@ public class PocketMoneyClient {
 
 	// String fundgateURl = "";
 
-	private String wso2appserverHome = "";
+	// private String wso2appserverHome = "";
 
 	// private final String agentMSISDN = "2347031537019";
 	// private final static String subscriberMSISDN = "2348076763191";
@@ -49,18 +48,19 @@ public class PocketMoneyClient {
 		setMoneyTransfer(moneyTransfer);
 		fundgateStub = new FundGateImplServiceStub();
 
-		if (System.getProperty("os.name").equals("Mac OS X")) {
-			wso2appserverHome = "/Users/user/Documents/workspace/wso2esb-4.8.1";
-		} else {
-			wso2appserverHome = "/opt/mats/wso2esb-4.8.1";
-		}
+		// if (System.getProperty("os.name").equals("Mac OS X")) {
+		// wso2appserverHome = "/Users/user/Documents/workspace/wso2esb-4.8.1";
+		// } else {
+		// wso2appserverHome = "/opt/mats/wso2esb-4.8.1";
+		// }
 	}
 
 	@SuppressWarnings("deprecation")
-	public void configureSecurity() throws UnknownHostException, IOException {
-		String clientSSLStore = wso2appserverHome + File.separator
-				+ "repository" + File.separator + "resources" + File.separator
-				+ "security" + File.separator + "client-truststore.jks";
+	public void configureSecurity(String clientSSLStore,
+			String clientSSLPassword) throws UnknownHostException, IOException {
+		// String clientSSLStore = wso2appserverHome + File.separator
+		// + "repository" + File.separator + "resources" + File.separator
+		// + "security" + File.separator + "client-truststore.jks";
 
 		// wso2carbon.jks client-truststore.jks
 
@@ -70,7 +70,8 @@ public class PocketMoneyClient {
 
 		System.setProperty("javax.net.ssl.trustStore", clientSSLStore);
 		System.setProperty("javax.net.ssl.trustStoreType", "JKS");
-		System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
+		System.setProperty("javax.net.ssl.trustStorePassword",
+				clientSSLPassword);
 		System.setProperty("jsse.enableSNIExtension", "false");
 		// System.setProperty("javax.net.debug", "ssl");
 		// System.setProperty("https.protocols", "SSLv3");
@@ -337,8 +338,8 @@ public class PocketMoneyClient {
 	public static void main(String args[]) throws Exception {
 
 		// performCashInPocket();
-		performCashoutPocket();
-		// performBalanceCheck();
+		// performCashoutPocket();
+		performBalanceCheck();
 		// performAccountQuery();
 
 	}
@@ -351,7 +352,10 @@ public class PocketMoneyClient {
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out
 				.println("---------------------------Before configuring security**********");
-		pocketMoneyClient.configureSecurity();
+		pocketMoneyClient.configureSecurity(
+				moneyTransfer.getTrustStoreLocation(),
+				moneyTransfer.getTrustStorePassword());
+		;
 		System.out
 				.println("---------------------------After configuring security**********");
 		FundResponse response = pocketMoneyClient.accountQuery(moneyTransfer);
@@ -374,7 +378,10 @@ public class PocketMoneyClient {
 
 		System.out
 				.println("---------------------------Before configuring security**********");
-		pocketMoneyClient.configureSecurity();
+		pocketMoneyClient.configureSecurity(
+				moneyTransfer.getTrustStoreLocation(),
+				moneyTransfer.getTrustStorePassword());
+		;
 		System.out
 				.println("---------------------------After configuring security**********");
 
@@ -397,7 +404,10 @@ public class PocketMoneyClient {
 		moneyTransfer.setSender(moneyTransfer.getAgentMSISDN());
 		System.out
 				.println("---------------------------Before configuring security**********");
-		pocketMoneyClient.configureSecurity();
+		pocketMoneyClient.configureSecurity(
+				moneyTransfer.getTrustStoreLocation(),
+				moneyTransfer.getTrustStorePassword());
+		;
 		System.out
 				.println("---------------------------After configuring security**********");
 		FundResponse response = pocketMoneyClient.doCashIn(moneyTransfer);
@@ -418,7 +428,10 @@ public class PocketMoneyClient {
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out
 				.println("---------------------------Before configuring security**********");
-		pocketMoneyClient.configureSecurity();
+		pocketMoneyClient.configureSecurity(
+				moneyTransfer.getTrustStoreLocation(),
+				moneyTransfer.getTrustStorePassword());
+		;
 		System.out
 				.println("---------------------------After configuring security**********");
 		FundResponse response = pocketMoneyClient.getBalance(moneyTransfer);

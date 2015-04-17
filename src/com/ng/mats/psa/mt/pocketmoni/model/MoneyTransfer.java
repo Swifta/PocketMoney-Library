@@ -16,6 +16,8 @@ public class MoneyTransfer {
 	private String terminalId;
 	private String masterKey;
 	private String samplePin;
+	private String trustStoreLocation;
+	private String trustStorePassword;
 
 	// @XmlTransient
 	// private CashOutStatus status = CashOutStatus.PENDING;
@@ -177,6 +179,22 @@ public class MoneyTransfer {
 		this.samplePin = samplePin;
 	}
 
+	public String getTrustStoreLocation() {
+		return trustStoreLocation;
+	}
+
+	public void setTrustStoreLocation(String trustStoreLocation) {
+		this.trustStoreLocation = trustStoreLocation;
+	}
+
+	public String getTrustStorePassword() {
+		return trustStorePassword;
+	}
+
+	public void setTrustStorePassword(String trustStorePassword) {
+		this.trustStorePassword = trustStorePassword;
+	}
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Sender: " + sender + "\n");
@@ -184,6 +202,8 @@ public class MoneyTransfer {
 		sb.append("Amount: " + amount + "\n");
 		sb.append("Reference: " + reference + "\n");
 		sb.append("Mmo: " + mmo + "\n");
+		sb.append("Trust Store Location: " + trustStoreLocation + "\n");
+		sb.append("Trust Store Password: " + trustStorePassword + "\n");
 		// sb.append("Status: " + status + "\n");
 
 		return sb.toString();

@@ -62,6 +62,10 @@ public class PocketMoniPropertyValues {
 				.setTeasypin(prop.getProperty("Teasypin_" + parameterType));
 		moneyTransfer
 				.setReceiver(prop.getProperty("Reciever_" + parameterType));
+		moneyTransfer.setTrustStoreLocation(prop
+				.getProperty("TrustStoreLocation_" + parameterType));
+		moneyTransfer.setTrustStorePassword(prop
+				.getProperty("TrustStorePassword_" + parameterType));
 		return moneyTransfer;
 
 	}
