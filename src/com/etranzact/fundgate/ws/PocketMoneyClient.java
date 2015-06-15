@@ -336,11 +336,11 @@ public class PocketMoneyClient {
 	}
 
 	public static void main(String args[]) throws Exception {
-
-		// performCashInPocket();
-		// performCashoutPocket();
-		performBalanceCheck();
-		// performAccountQuery();
+		PocketMoneyClient pmClient = new PocketMoneyClient();
+		// pmClient.performCashInPocket();
+		// pmClient.performCashoutPocket();
+		pmClient.performBalanceCheck();
+		// pmClient.performAccountQuery();
 
 	}
 
@@ -427,7 +427,8 @@ public class PocketMoneyClient {
 
 		PocketMoneyClient pocketMoneyClient = new PocketMoneyClient();
 		System.out
-				.println("---------------------------Before configuring security**********");
+				.println("---------------------------Before configuring security**********"
+						+ moneyTransfer.getTrustStoreLocation());
 		pocketMoneyClient.configureSecurity(
 				moneyTransfer.getTrustStoreLocation(),
 				moneyTransfer.getTrustStorePassword());

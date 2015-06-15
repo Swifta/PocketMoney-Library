@@ -4,10 +4,8 @@ import javax.xml.bind.annotation.XmlEnumValue;
 
 public enum MoneyTransferStatus {
 	@XmlEnumValue(value = "created")
-	CREATED, 
-	@XmlEnumValue(value = "pending")
-	PENDING, 
-	@XmlEnumValue(value = "complete")
+	CREATED, @XmlEnumValue(value = "pending")
+	PENDING, @XmlEnumValue(value = "complete")
 	COMPLETED
 
 }
